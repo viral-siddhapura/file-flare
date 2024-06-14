@@ -15,4 +15,4 @@ Transfer File is a user-friendly file-sharing platform designed to provide secur
 
 1. **Clone the Repository:**
    ```bash
-   git clone [https://github.com/viral-siddhapura/transfer-file]
+   git clone https://github.com/viral-siddhapura/transfer-file
