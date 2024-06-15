@@ -66,6 +66,13 @@ const HomePage = () => {
         }
     };
 
+    const generateLink = async () => {
+
+        
+
+        return;
+    };
+
     return (
         <>
             <div>
@@ -92,6 +99,15 @@ const HomePage = () => {
             }
 
             <Result status={status} />
+
+            {
+                status === "success" && (
+                    <section>
+                        <p> As of now we are just allowing 5 minutes access to the user</p>
+                        <button onClick={generateLink}>Generate a Link</button>
+                    </section>
+                )
+            }
 
         </>
     )
