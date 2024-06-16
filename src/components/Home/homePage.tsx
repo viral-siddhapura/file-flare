@@ -7,9 +7,12 @@ const HomePage = () => {
         "initial" | "uploading" | "success" | "fail"
     >("initial");
 
+    const [presignedURL, setPresignedURL] = useState<string | null>();
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             setStatus("initial");
+            setPresignedURL(null);
             setFile(e.target.files[0]);
         }
     };
@@ -73,8 +76,9 @@ const HomePage = () => {
             method: 'GET',
         });
 
-        if(response.ok) {
+        if (response.ok) {
             const data = await response.json();
+            setPresignedURL(data.presigned_url);
             console.log("Generated URL is : ", data.presigned_url);
         }
     };
@@ -109,9 +113,17 @@ const HomePage = () => {
             {
                 status === "success" && (
                     <section>
-                        <p> As of now we are just allowing 5 minutes access to the user</p>
+                        <p> As of now we are just allowing 1 minute access to the generated link</p>
                         <button onClick={generateLink}>Generate a Link</button>
                     </section>
+                )
+            }
+
+            {
+                presignedURL && (
+                    <section>
+                        <p>Presigned URL: <a href={presignedURL} target="_blank" rel="noreferrer">Download</a></p>
+                    </section >
                 )
             }
 
