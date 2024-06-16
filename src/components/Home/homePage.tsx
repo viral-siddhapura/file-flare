@@ -68,9 +68,15 @@ const HomePage = () => {
 
     const generateLink = async () => {
 
-        
+        // generate a presigned url for the file uploaded
+        const response = await fetch(`https://5ooesq9dae.execute-api.us-east-1.amazonaws.com/prod/generateURL?filename=${encodeURIComponent(file!.name)}`, {
+            method: 'GET',
+        });
 
-        return;
+        if(response.ok) {
+            const data = await response.json();
+            console.log("Generated URL is : ", data.presigned_url);
+        }
     };
 
     return (
