@@ -130,7 +130,7 @@ const HomePage = () => {
             {
                 presignedURL && (
                     <section>
-                        <p>Presigned URL: <a href={presignedURL} target="_blank" rel="noreferrer">Download</a></p>
+                        <p>Here is your file: <a href={presignedURL} target="_blank" rel="noreferrer">Download</a></p>
                     </section >
                 )
             }
