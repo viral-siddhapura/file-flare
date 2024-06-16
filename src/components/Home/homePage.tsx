@@ -122,7 +122,7 @@ const HomePage = () => {
                         <p>4: Restrict the number of download options for the generated link</p>
                         <hr></hr>
                         <p>As of now we are just allowing 1 minute access to the generated link</p>
-                        <button onClick={generateLink}>Generate a Link</button>
+                        <button onClick={generateLink}>Generate Link</button>
                     </section>
                 )
             }
