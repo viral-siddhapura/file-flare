@@ -110,10 +110,18 @@ const HomePage = () => {
 
             <Result status={status} />
 
+            <hr></hr>
+
             {
                 status === "success" && (
                     <section>
-                        <p> As of now we are just allowing 1 minute access to the generated link</p>
+                        <p>Upcoming features: </p>
+                        <p>1: Send file over an email with/without password</p>
+                        <p>2: Shorterning the URL of the file - it could be funny URL 😂</p>
+                        <p>3: What else you want me to do - something crazy please 🤔🫥 ? Let my <a href="mailto:viral.siddhapurra@gmail.com" target="_blank" rel="noreferrer">Email</a> hit by you guys!</p>
+                        <p>4: Restrict the number of download options for the generated link</p>
+                        <hr></hr>
+                        <p>As of now we are just allowing 1 minute access to the generated link</p>
                         <button onClick={generateLink}>Generate a Link</button>
                     </section>
                 )
