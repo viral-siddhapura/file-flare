@@ -41,4 +41,4 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
       run: |
-        aws ecs update-service --cluster transfer-chain-cluster --service 005e767037d34781a3e1647e385b0124 --force-new-deployment
+        aws ecs update-service --cluster transfer-chain-cluster --service transfer-file-service --force-new-deployment
