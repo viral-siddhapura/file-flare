@@ -44,6 +44,8 @@ jobs:
         aws ecs update-service --cluster transfer-chain-cluster --service transfer-file-service --force-new-deployment
 
     - name: Retrieve ALB DNS Name
+      env:
+        AWS_REGION: ${{ secrets.AWS_REGION }}
       id: get-alb-dns
       run: |
         SERVICE_INFO=$(aws ecs describe-services --cluster transfer-chain-cluster --services transfer-file-service)
