@@ -46,8 +46,10 @@ jobs:
     - name: Retrieve ALB DNS Name
       id: get-alb-dns
       run: |
-        ALB_ARN=$(aws ecs describe-services --cluster transfer-chain-cluster --services transfer-file-service --query "services[0].loadBalancers[0].loadBalancerName" --output text)
-        ALB_DNS=$(aws elbv2 describe-load-balancers --names $ALB_ARN --query "LoadBalancers[0].DNSName" --output text)
+        SERVICE_INFO=$(aws ecs describe-services --cluster transfer-chain-cluster --services transfer-file-service)
+        TARGET_GROUP_ARN=$(echo $SERVICE_INFO | jq -r '.services[0].loadBalancers[0].targetGroupArn')
+        ALB_ARN=$(aws elbv2 describe-target-groups --target-group-arns $TARGET_GROUP_ARN | jq -r '.TargetGroups[0].LoadBalancerArns[0]')
+        ALB_DNS=$(aws elbv2 describe-load-balancers --load-balancer-arns $ALB_ARN --query "LoadBalancers[0].DNSName" --output text)
         echo "ALB_DNS=${ALB_DNS}" >> $GITHUB_ENV
 
     - name: Output ALB DNS Name
