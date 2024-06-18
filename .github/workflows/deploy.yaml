@@ -41,14 +41,12 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
       run: |
-        aws ecs update-service --cluster transfer-chain-cluster --service transfer-file-service --force-new-deployment
+        aws ecs update-service --cluster transfer-chain-cluster --service transfer-file-service --force-new-deployment --region ${{ env.AWS_REGION }
 
     - name: Retrieve ALB DNS Name
-      env:
-        AWS_REGION: ${{ secrets.AWS_REGION }}
       id: get-alb-dns
       run: |
-        TARGET_GROUP_ARN=$(aws ecs describe-services --cluster transfer-chain-cluster --services transfer-file-service --query "services[0].loadBalancers[0].targetGroupArn" --output text)
+        TARGET_GROUP_ARN=$(aws ecs describe-services --cluster transfer-chain-cluster --services transfer-file-service --query "services[0].loadBalancers[0].targetGroupArn" --output text --region ${{ env.AWS_REGION })
         ALB_ARN=$(aws elbv2 describe-target-groups --target-group-arns $TARGET_GROUP_ARN --query "TargetGroups[0].LoadBalancerArns[0]" --output text --region ${{ env.AWS_REGION }})
         ALB_DNS=$(aws elbv2 describe-load-balancers --load-balancer-arns $ALB_ARN --query "LoadBalancers[0].DNSName" --output text --region ${{ env.AWS_REGION }})
         echo "ALB_DNS=${ALB_DNS}" >> $GITHUB_ENV
