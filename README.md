@@ -11,4 +11,4 @@ Transfer File is a user-friendly file-sharing platform designed to provide secur
 * **Link Customization:** Personalize shareable links with custom names or descriptions for easy identification.
 * **Detailed Download History:**  Track who has accessed your files and when they were downloaded.
 
-(Project-Link)[https://transfer-file.netlify.app/]
+[https://transfer-file.netlify.app/]
