@@ -1,4 +1,4 @@
-# Transfer File - Secure File Sharing with Time-Limited Downloads
+# Share Sphere - Secure File Sharing with Time-Limited Downloads
 
 Transfer File is a user-friendly file-sharing platform designed to provide secure and controlled access to your files. Upload your files, generate unique shareable links, and set pre-defined download time limits to ensure your data is only available to authorized users for a specified period.
 
