@@ -2,7 +2,7 @@
 
 FileFlare is a user-friendly file-sharing platform designed to provide secure and controlled access to your files. Upload your files, generate unique shareable links, and set pre-defined download time limits to ensure your data is only available to authorized users for a specified period.
 
-FileFlare URL - [https://file-flare.netlify.app/](url)
+* *FileFlare URL*: [https://classmate-g7.netlify.app/](https://file-flare.netlify.app/)
 
 ## Features
 
