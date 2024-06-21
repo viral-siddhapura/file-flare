@@ -11,4 +11,4 @@ FileFlare is a user-friendly file-sharing platform designed to provide secure an
 * **Link Customization:** Personalize shareable links with custom names or descriptions for easy identification.
 * **Detailed Download History:**  Track who has accessed your files and when they were downloaded.
 
-[https://transfer-file.netlify.app/]
+[FileFlare Live]([url](https://file-flare.netlify.app/))
