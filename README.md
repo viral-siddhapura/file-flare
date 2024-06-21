@@ -1,6 +1,6 @@
-# Share Sphere - Secure File Sharing with Time-Limited Downloads
+# File Flare - Secure File Sharing with Time-Limited Downloads
 
-Share Sphere is a user-friendly file-sharing platform designed to provide secure and controlled access to your files. Upload your files, generate unique shareable links, and set pre-defined download time limits to ensure your data is only available to authorized users for a specified period.
+FileFlare is a user-friendly file-sharing platform designed to provide secure and controlled access to your files. Upload your files, generate unique shareable links, and set pre-defined download time limits to ensure your data is only available to authorized users for a specified period.
 
 ## Features
 
