@@ -1,36 +1,60 @@
 import json
-import logging
 import boto3
-from botocore.exceptions import ClientError
+import uuid
 import os
 
-bucket_name = os.environ['BUCKET_NAME']
 s3_client = boto3.client('s3')
+bucket_name = os.environ['BUCKET_NAME']  # Set this environment variable in the Lambda configuration
 
 def lambda_handler(event, context):
     
-    filename = event['queryStringParameters']['filename']
+    print(f"Received event: {json.dumps(event)}")
     
     try:
-        response = s3_client.generate_presigned_post(
-                Bucket=bucket_name,
-                Key=filename,
-                Fields=None,
-                Conditions=None,
-                ExpiresIn=3600
-            )
+        # Extract file details from the event
+        body = json.loads(event['body'])
+        print(body)
+        files = body['files']  # Expecting a list of file details: [{'fileName': 'name1', 'fileType': 'type1'}, ...]
+        print(files)
         
-    except ClientError as e:
-        logging.error(e)
-        return None
+        response = []
+        
+        for file in files:
+            file_name = file['fileName']
+            file_type = file['fileType']
+            key = f"{file_name}"
+
+            # Generate pre-signed POST URL
+            presigned_post = s3_client.generate_presigned_post(
+                Bucket=bucket_name,
+                Key=key,
+                Fields={"Content-Type": file_type},
+                Conditions=[
+                    {"Content-Type": file_type}
+                ],
+                ExpiresIn=3600  # URL expiration time in seconds
+            )
+
+            response.append({
+                "url": presigned_post['url'],
+                "fields": presigned_post['fields']
+            })
+        
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT'
+            },
+            'body': json.dumps(response)
+        }
     
-    return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT'
-        },
-        'body': json.dumps(response)
-        # 'body': json.dumps({"presigned_url": response})
-    }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'headers': {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT'
+            },
+            'body': json.dumps(str(e))
+        }
